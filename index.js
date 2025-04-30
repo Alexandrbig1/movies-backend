@@ -23,9 +23,7 @@ app.use(express.json());
 app.use("/api/movies", moviesRouter);
 
 app.use((req, res) => {
-  res.status(404).json({
-    message: "Not Found",
-  });
+  res.status(404).json({ message: "Page not found" });
 });
 
 app.use((err, req, res, next) => {
