@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import moviesRouter from "./routes/moviesRouter.js";
 import morgan from "morgan";
+import rateLimit from "express-rate-limit";
 
 dotenv.config();
 
