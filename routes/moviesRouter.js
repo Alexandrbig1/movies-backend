@@ -20,13 +20,13 @@ moviesRouter.post(
   moviesControllers.createNewMovie
 );
 
-moviesRouter.put(
-  "/:id",
-  isEmptyBody,
-  validateBody(movieUpdateSchema),
-  moviesControllers.updateById
-);
+// moviesRouter.put(
+//   "/:id",
+//   isEmptyBody,
+//   validateBody(movieUpdateSchema),
+//   moviesControllers.updateById
+// );
 
-moviesRouter.delete("/:id", moviesControllers.deleteMovie);
+// moviesRouter.delete("/:id", moviesControllers.deleteMovie);
 
 export default moviesRouter;
