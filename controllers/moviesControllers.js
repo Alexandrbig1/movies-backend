@@ -30,34 +30,36 @@ const createNewMovie = async (req, res) => {
   res.status(201).json(createNewMovie);
 };
 
-// const updateById = async (req, res) => {
-//   const newMovie = req.body;
-//   const { id } = req.params;
+const updateById = async (req, res) => {
+  const { id } = req.params;
+  const newMovie = req.body;
 
-//   const updateMovie = await moviesServices.updateMovie(id, newMovie);
+  const updateMovie = await Movie.findByIdAndUpdate(id, newMovie, {
+    new: true,
+  });
 
-//   if (!updateMovie) {
-//     throw HttpError(404, "Movie not found");
-//   }
+  if (!updateMovie) {
+    throw HttpError(404, "Movie not found");
+  }
 
-//   res.json(updateMovie);
-// };
+  res.json(updateMovie);
+};
 
-// const deleteMovie = async (req, res) => {
-//   const { id } = req.params;
-//   const deletedMovie = await moviesServices.deleteMovie(id);
-//   if (!deletedMovie) {
-//     throw HttpError(404, "Movie not found");
-//   }
-//   res.json({
-//     message: "Movie deleted",
-//   });
-// };
+const deleteMovie = async (req, res) => {
+  const { id } = req.params;
+  const deletedMovie = await Movie.findByIdAndDelete(id);
+  if (!deletedMovie) {
+    throw HttpError(404, "Movie not found");
+  }
+  res.json({
+    message: "Movie deleted",
+  });
+};
 
 export default {
   getAllMovies: ctrlWrapper(getAllMovies),
   getMovieById: ctrlWrapper(getMovieById),
   createNewMovie: ctrlWrapper(createNewMovie),
-  // updateById: ctrlWrapper(updateById),
-  // deleteMovie: ctrlWrapper(deleteMovie),
+  updateById: ctrlWrapper(updateById),
+  deleteMovie: ctrlWrapper(deleteMovie),
 };

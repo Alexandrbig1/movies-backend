@@ -1,10 +1,15 @@
 import { Schema, model } from "mongoose";
-import { handleSaveError } from "./hooks.js";
+import { addUpdateSettings, handleSaveError } from "./hooks.js";
 
 const movieSchema = new Schema(
   {
     title: String,
     director: String,
+    favorite: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
     releaseYear: {
       type: String,
       validate: {
@@ -24,6 +29,10 @@ const movieSchema = new Schema(
 );
 
 movieSchema.post("save", handleSaveError);
+
+movieSchema.pre("findOneAndUpdate", addUpdateSettings);
+
+movieSchema.post("findOneAndUpdate", handleSaveError);
 
 const Movie = model("Movie", movieSchema);
 

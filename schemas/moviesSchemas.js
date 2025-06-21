@@ -3,6 +3,7 @@ import joi from "joi";
 const movieAddSchema = joi.object({
   title: joi.string().required(),
   director: joi.string().required(),
+  favorite: joi.boolean().required(),
   releaseYear: joi.string(),
   genre: joi
     .string()
@@ -13,6 +14,13 @@ const movieAddSchema = joi.object({
 const movieUpdateSchema = joi.object({
   title: joi.string(),
   director: joi.string(),
+  favorite: joi.boolean(),
+  releaseYear: joi.string(),
+  genre: joi.string().valid("Action", "Comedy", "Drama", "Horror", "Sci-Fi"),
 });
 
-export { movieAddSchema, movieUpdateSchema };
+const movieUpdateFavoriteSchema = joi.object({
+  favorite: joi.boolean().required(),
+});
+
+export { movieAddSchema, movieUpdateSchema, movieUpdateFavoriteSchema };
